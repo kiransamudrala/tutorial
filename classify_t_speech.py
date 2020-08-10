@@ -37,7 +37,7 @@ def get_tfidf(data):
 
 
 # read all files in the folder
-path = '/Users/kiran/Documents/my_py/nltk/data/'
+path = 'data/'
 filenames = os.listdir(path)
 head = []
 text = []
