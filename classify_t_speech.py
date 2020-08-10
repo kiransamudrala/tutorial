@@ -161,9 +161,9 @@ k1data = fmk[['col1']].sort_values(by=['col1'],ascending=False)
 k2data = fmk[['col2']].sort_values(by=['col2'],ascending=False)
 k3data = fmk[['col3']].sort_values(by=['col3'],ascending=False)
 
-st.title(' Trump Speech Classification')
-st.write('This natural language processing example displays the results of analyzing transcripts of seventy-four different speeches of President Trump ')
-st.write('A) DATA MODEL: bag-of-words + tfidf')
+st.title(' Politician Speech Transcript Classification')
+st.write('This natural language processing example displays the results of analyzing transcripts of seventy-four different speeches of a nominated Presidential candidate ')
+st.write('A) Data Model: bag-of-words + tfidf')
 st.write('tfidf = Term Frequency - Inverse Document Frequency')
 st.write('\tThis tfidf is a measure of frequency of occurrence of a given word in the current document when compared to the entire corpus.So based on the tfidf calculated for each of the seventy-four transcripts, here are the most important words by their decreasing order of tf-idf:')
 Total = fmt.sum().sort_values(ascending=False)
@@ -175,25 +175,25 @@ c1 = alt.Chart(fmt2).mark_circle().encode(x='people', y='clinton',tooltip='speec
 st.altair_chart(c1)
 st.write('There are no evidently different clusters. Also, given that there are 7000+ dimensions, a natural first step is to apply dimensionality reduction to revisualize this high dimensional data.')
 
-st.write('B) DIMENSIONALITY REDUCTION: PRINCIPAL COMPONENT ANALYSIS (PCA)')
+st.write('B) Dimensionality Reduction: Principal Component Analysis (PCA)')
 st.write('We choose PCA due to its simplicity in being able to interpret the axes. Applying PCA renders somewhat visually disparate clusters. The scree plot of eigenvalues promised that we would only be covering the 13% of variability in the data by viewing the first two components of PCA. Nevertheless, PCA is always a great first step in the right direction when there are no labels on the data. ')
 c2 = alt.Chart(pdf2).mark_circle().encode(x='pc1', y='pc2',color=alt.Color('clist', scale=None),tooltip='speech_header')
 st.altair_chart(c2)
-st.write('C) CLUSTERING: VISUAL AND MANUAL ')
+st.write('C) Clustering:  ')
 st.write('In the above PCA output plot I have marked the visually distinct clusters in different colors. Please note that the k-means clustering was not doing a good job in our case - either because we have to improvise our features or because the data is lying on a non-linear manifold (See APPENDIX below). Now let us calculate the tfidf of each individual cluster to see what is marking them differently')
 st.image('important_words.png',width=800)
 
-st.write('D) DATA ANALYSIS:')
+st.write('D) Data Analysis:')
 st.markdown("""
-            <ul><li> Moving along from left to right the amount of focus on words related to opponents (\'Hillary\',\'Clinton\') kept going down </li>
+            <ul><li> Moving along from left to right the amount of focus on words related to their colleagues (\'Hillary\',\'Clinton\') kept going down </li>
             <li> From left to right the speeches started to transform from more formal to less formal 
             <ul>
             <li> Blue formal cluster: trade/world/government/president</li>
             <li> Red cluster: less formal with believe/cheers </li>
             <li> Green cluster: pep talk like words got/look/go/way/win </li> </ul> </li> </ul>
             """, unsafe_allow_html=True)
-st.write('E) PERFORMANCE MEASURE: If more formal methods like k-means clustering worked, we could have leveraged cluster validity indices like Dunn/Silhouette to measure the performance of the model. Unfortunately, for a visual clustering method, we do not have a good way to measure the performance of the model.')
-st.write('F) NEXT STEPS: Other directions to pursue are:')
+st.write('E) Performance Measure: If more formal methods like k-means clustering worked, we could have leveraged cluster validity indices like Dunn/Silhouette to measure the performance of the model. Unfortunately, for a visual clustering method, we do not have a good way to measure the performance of the model.')
+st.write('F) Next Steps: Other directions to pursue are:')
 st.markdown("""
             <li> explore rule-based classification </li> 
             <li> if we have labelled data, we can apply supervised techniques like decision trees </li>
@@ -203,7 +203,7 @@ st.markdown("""
             
 st.write('')
 st.write('')
-st.write('APPENDIX:')
+st.write('Appendix:')
 st.write(' Here is why I did not use k-means clustering:')
 
 kmcolor=[]
