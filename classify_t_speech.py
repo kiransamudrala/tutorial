@@ -172,13 +172,13 @@ st.write('If tfidf from the bag-of-words data representation model is the featur
 fmt2 = fmt[['people','clinton']]
 fmt2['speech_header']=head
 c1 = alt.Chart(fmt2).mark_circle().encode(x='people', y='clinton',tooltip='speech_header')
-st.altair_chart(c1, use_container_width=True)
+st.altair_chart(c1)
 st.write('There are no evidently different clusters. Also, given that there are 7000+ dimensions, a natural first step is to apply dimensionality reduction to revisualize this high dimensional data.')
 
 st.write('B) DIMENSIONALITY REDUCTION: PRINCIPAL COMPONENT ANALYSIS (PCA)')
 st.write('We choose PCA due to its simplicity in being able to interpret the axes. Applying PCA renders somewhat visually disparate clusters. The scree plot of eigenvalues promised that we would only be covering the 13% of variability in the data by viewing the first two components of PCA. Nevertheless, PCA is always a great first step in the right direction when there are no labels on the data. ')
 c2 = alt.Chart(pdf2).mark_circle().encode(x='pc1', y='pc2',color=alt.Color('clist', scale=None),tooltip='speech_header')
-st.altair_chart(c2, use_container_width=True)
+st.altair_chart(c2)
 st.write('C) CLUSTERING: VISUAL AND MANUAL ')
 st.write('In the above PCA output plot I have marked the visually distinct clusters in different colors. Please note that the k-means clustering was not doing a good job in our case - either because we have to improvise our features or because the data is lying on a non-linear manifold (See APPENDIX below). Now let us calculate the tfidf of each individual cluster to see what is marking them differently')
 st.image('important_words.png',width=800)
@@ -216,7 +216,7 @@ for k in km.labels_:
         kmcolor.append('green')
 pdf2['kmcluster']=pd.DataFrame(kmcolor)
 c3 = alt.Chart(pdf2).mark_circle().encode(x='pc1', y='pc2',color=alt.Color('kmcluster',scale=None),tooltip='speech_header')
-st.altair_chart(c3, use_container_width=True)
+st.altair_chart(c3)
 
 # extract top words for each of the kmclusters
 st.write(' Just like what we did with visual clusters, let us calculate tfidf of each individual k-means cluster to see what is making k-means algorithm mark the clusters differently')
