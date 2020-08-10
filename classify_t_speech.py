@@ -12,6 +12,7 @@ from sklearn.cluster import KMeans
 import altair as alt
 
 
+
 # compute tfidf
 def get_tfidf(data):
     cv = CountVectorizer()
@@ -52,8 +53,14 @@ for filename in filenames:
         text.append(lines[1])
 
 # remove stopwords from each text
-stops = stopwords.words('english')
-stops = stops +['also','under','many','back','applause','if','us','like','really','going','know','said','get','want','say','one','need','new','every']
+stopsdf = pd.read_csv('stops.txt')
+stopsdf = stopsdf[['0']]
+stopsdf.columns=['stopwords']
+stops = stopsdf['stopwords'].values.tolist()
+# stops = stopwords.words('english')
+# stops = stops +['also','under','many','back','applause','if','us','like','really','going','know','said','get','want','say','one','need','new','every']
+# dfstop = pd.DataFrame(stops)
+# dfstop.to_csv('stops.txt')
 text2 = []
 for t in text:
     t=t.lower()
@@ -66,7 +73,6 @@ for t in text:
 
 
 fm = get_tfidf(text2)
-
 fmt  = fm.transpose()
 pca = PCA(n_components=74)
 pcs = pca.fit_transform(fmt)
