@@ -1,4 +1,5 @@
 #!/bin/sh
+git add .
 git stash
 git checkout master
 git stash pop
