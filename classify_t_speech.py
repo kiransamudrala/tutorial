@@ -160,7 +160,58 @@ green = fmc[['col3']].sort_values(by=['col3'],ascending=False)
 k1data = fmk[['col1']].sort_values(by=['col1'],ascending=False)
 k2data = fmk[['col2']].sort_values(by=['col2'],ascending=False)
 k3data = fmk[['col3']].sort_values(by=['col3'],ascending=False)
+######################
 
+
+
+import pandas as pd
+import random
+
+st.title('OneTrust Articles')
+st.write('The below chart is a reduced dimensional representation of the \
+         output of word2vec model applied to a bunch of news articles \
+             downloaded from dataguidance.com. Each time you refresh the page \
+                 the chart shows a randomly picked 50 words.\
+                 The proximity of the words on the chart is a function of \
+                     their meaning or their co-occurrence in the documents')
+        
+dfall= pd.read_csv('word2vec_output2.csv')
+n = 50
+seed = random.randint(0,len(dfall)+n-1)
+df = dfall.iloc[seed:seed+n-1,:]
+#chart = alt.Chart(df).mark_circle().encode(x='x', y='y',tooltip='words',text='words')
+
+
+source = df
+
+points = alt.Chart(source).mark_point().encode(
+    x='x',
+    y='y'
+).properties(
+    width=800,
+    height=800
+    
+    )
+
+text = points.mark_text(
+    align='left',
+    baseline='middle',
+    dx=7
+).encode(
+    text='words'
+)
+
+points + text
+
+
+
+
+
+
+
+
+
+##########################
 st.title(' Politician Speech Transcript Classification')
 st.write('This natural language processing example displays the results of analyzing transcripts of seventy-four different speeches of a nominated Presidential candidate ')
 st.write('A) Data Model: bag-of-words + tfidf')
