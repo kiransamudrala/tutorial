@@ -162,20 +162,43 @@ k2data = fmk[['col2']].sort_values(by=['col2'],ascending=False)
 k3data = fmk[['col3']].sort_values(by=['col3'],ascending=False)
 ######################
 
-
-
+import streamlit as st
+import altair as alt
 import pandas as pd
 import random
 
 st.title('OneTrust Articles')
+
+dfall= pd.read_csv('word2vec_output.csv')
 st.write('The below chart is a reduced dimensional representation of the \
          output of word2vec model applied to a bunch of news articles \
-             downloaded from dataguidance.com. Each time you refresh the page \
+        downloaded from http://www.dataguidance.com/news. 300 articles were read and analyzed using \
+        word2vec model. And further PCA was applied on the results. \
+        The proximity of the words on the chart is a function of \
+        their meaning or their co-occurrence in the documents. \
+        Since the first two components were only able to capture 14% of variability in the data \
+        we can still see some words which are actually not next to eachother \
+        seemingly very close to eachother in the chart.')
+
+source = dfall
+points_all = alt.Chart(source).mark_point().encode(
+    x='x',
+    y='y',
+    tooltip='words'
+).properties(
+    width=800,
+    height=800
+    
+    )
+
+points_all
+
+
+st.write('Zoomed in View: The below chart is a subset of the above chart. Each time you refresh the page \
                  the chart shows a randomly picked 50 words.\
                  The proximity of the words on the chart is a function of \
-                     their meaning or their co-occurrence in the documents')
+                     their meaning or their co-occurrence in the documents.')
         
-dfall= pd.read_csv('word2vec_output2.csv')
 n = 50
 seed = random.randint(0,len(dfall)+n-1)
 df = dfall.iloc[seed:seed+n-1,:]
@@ -203,7 +226,7 @@ text = points.mark_text(
 
 points + text
 
-
+st.write('Copyrights of all the data sources belongs to OneTrust')
 
 
 
