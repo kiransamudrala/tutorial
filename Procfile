@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run classify_t_speech.py
+web: sh setup.sh && streamlit run step03_doc2vec.py
