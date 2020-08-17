@@ -97,7 +97,7 @@ st.markdown(
         </ul>
     </ul>
     """, unsafe_allow_html=True)
-st.write('Below is my proposed approach (green bullets are the ones I finished implementing in python):')
+st.write('Below is the high-level summary of my proposed approach (green bullets are the ones I finished implementing in python):')
 st.markdown(
     """
     <li> <font color='green'> Input: Scraped 240 news articles from dataguidance.com </font></li>
@@ -110,8 +110,10 @@ st.markdown(
     <li>Measure the performance of the model using metrics like Recall, Precision, F1</li>
     """, unsafe_allow_html=True)
 
-st.write('Document Cloud: In the below chart, each dot is a news article.\
-         Hover over to see what topic they are tagged by.')
+st.write('Document cloud or feature space: In the below chart, each dot is a news article.\
+         Hover/Tap over to see what topic they are tagged by. This document cloud is a \
+        reduced representation obtained by applying PCA - the unsupervised linear \
+            dimensionality reduction technique. ')
 
 source = dfdc
 
@@ -129,7 +131,7 @@ points
 
 dfwc=pd.read_csv('data/wordcloud.csv')
 
-st.write('The below chart is a reduced dimensional representation of the \
+st.write('Word cloud or target variable space: The below chart is a reduced dimensional representation of the \
          word cloud produced by analyzing 240 articles using the \
         word2vec model. \
         The proximity of the words on the chart is a function of \
